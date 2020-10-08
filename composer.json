@@ -2,6 +2,8 @@
     "name": "lavendar77/slarb",
     "description": "A Simple API Response Builder for Laravel Apps",
     "type": "project",
+    "homepage": "https://github.com/lavendar77/slarb",
+    "keywords": ["api", "laravel", "response builder"],
     "require": {
         "php": "^7.3|^7.4",
         "laravel/framework": "^6.0|^7.0|^8.0"
