@@ -1,14 +1,11 @@
 {
     "name": "lavendar77/slarb",
     "description": "A Simple API Response Builder for Laravel Apps",
-    "type": "project",
-    "homepage": "https://github.com/lavendar77/slarb",
+    "type": "library",
+    "homepage": "https://github.com/Lavendar77/slarb",
     "keywords": ["api", "laravel", "response builder"],
     "require": {
         "php": "^7.2"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^8.0 || ^9.0"
     },
     "license": "MIT",
     "authors": [
@@ -26,11 +23,6 @@
             "src/Helpers.php"
         ]
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Lavendar77\\Slarb\\Test\\": "tests"
-        }
-    },
     "extra": {
         "laravel": {
             "providers": [
@@ -40,8 +32,5 @@
                 "Slarb": "Lavendar77\\Slarb\\Slarb"
             }
         }
-    },
-    "scripts": {
-        "test": "vendor/bin/phpunit"
     }
 }
