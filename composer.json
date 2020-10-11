@@ -18,7 +18,12 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "Lavendar77\\Slarb\\": "src/"
+            "Lavendar77\\Slarb\\": "src"
+        },
+        "files": [
+            "src/Helpers.php"
+        ]
+    },
         }
     },
     "extra": {

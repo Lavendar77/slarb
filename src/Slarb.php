@@ -29,9 +29,13 @@ use Symfony\Component\HttpFoundation\Response;
  * @method JsonResponse build() Build the response.
  */
 class Slarb {
-	public const SLARB_KEY_STATUS = 'status';
-	public const SLARB_KEY_MESSAGE = 'message';
 	public const SLARB_KEY_DATA = 'data';
+	public const SLARB_KEY_MESSAGE = 'message';
+	public const SLARB_KEY_STATUS = 'status';
+
+	public const SLARB_ERROR_MESSAGE = 'Request failed';
+	public const SLARB_PROCESSING_MESSAGE = 'Request is processing';
+	public const SLARB_SUCCESS_MESSAGE = 'Request was successful';
 
 	private bool $_status;
 	private int $_httpCode;
@@ -42,12 +46,28 @@ class Slarb {
 	 * @param bool $status
 	 * @param int $httpCode
 	 * @param string $message
+	 * @param mixed $data
 	 */
-	protected function __construct(bool $status, int $httpCode, string $message)
+	protected function __construct(bool $status, int $httpCode, string $message, $data = null)
 	{
 		$this->_status = $status;
 		$this->_httpCode = $httpCode;
 		$this->_message = $message;
+		$this->_data = $data;
+	}
+
+	/**
+	 * Set a fresh response.
+	 * 
+	 * @return self
+	 */
+	public static function respond(bool $status): object
+	{
+		return new self(
+			$status,
+			Response::HTTP_CONTINUE,
+			static::SLARB_PROCESSING_MESSAGE
+		);
 	}
 
 	/**
@@ -57,7 +77,11 @@ class Slarb {
 	 */
 	public static function success(): object
 	{
-		return new self(true, Response::HTTP_OK, 'Request Successful');
+		return new self(
+			true,
+			Response::HTTP_OK,
+			static::SLARB_SUCCESS_MESSAGE
+		);
 	}
 
 	/**
@@ -67,7 +91,11 @@ class Slarb {
 	 */
 	public static function error(): object
 	{
-		return new self(false, Response::HTTP_BAD_REQUEST, 'Request Failed');
+		return new self(
+			false,
+			Response::HTTP_BAD_REQUEST,
+			static::SLARB_ERROR_MESSAGE
+		);
 	}
 
 	/**
