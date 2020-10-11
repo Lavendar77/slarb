@@ -5,8 +5,10 @@
     "homepage": "https://github.com/lavendar77/slarb",
     "keywords": ["api", "laravel", "response builder"],
     "require": {
-        "php": "^7.3|^7.4",
-        "laravel/framework": "^6.0|^7.0|^8.0"
+        "php": "^7.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0 || ^9.0"
     },
     "license": "MIT",
     "authors": [
@@ -24,6 +26,9 @@
             "src/Helpers.php"
         ]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Lavendar77\\Slarb\\Test\\": "tests"
         }
     },
     "extra": {
@@ -35,5 +40,8 @@
                 "Slarb": "Lavendar77\\Slarb\\Slarb"
             }
         }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
     }
 }
