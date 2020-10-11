@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Lavendar77\Slarb;
 
-use Symfony\Component\HttpFoundation\Response;
+use Lavendar77\Slarb\Validator;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class Slarb
@@ -104,23 +105,7 @@ class Slarb {
 	 */
 	public function withHttpCode(int $httpCode)
 	{
-		if (!array_key_exists($httpCode, Response::$statusTexts)) {
-			throw new \InvalidArgumentException(sprintf('The HTTP status code "%s" is not valid.', $httpCode));
-		}
-
-		$statusMessage = $this->_status ? 'success' : 'error';
-
-		if ($this->_status === true and $httpCode >= Response::HTTP_BAD_REQUEST) {
-			throw new \InvalidArgumentException(
-				sprintf('The HTTP status code "%s" is not valid for a "%s" request.', $httpCode, $statusMessage)
-			);
-		}
-
-		if ($this->_status === false and ($httpCode >= Response::HTTP_OK and $httpCode < Response::HTTP_BAD_REQUEST)) {
-			throw new \InvalidArgumentException(
-				sprintf('The HTTP status code "%s" is not valid for a "%s" request.', $statusCode, $statusMessage)
-			);
-		}
+		Validator::validateHttpCode($this->_status, $httpCode);
 
 		$this->_httpCode = $httpCode;
 
